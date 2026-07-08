@@ -424,7 +424,8 @@
 						widgetLayout.RowSpan,
 						widgetLayout.ColumnSpan,
 						widgetLayout.HorizontalAlignment,
-						widgetLayout.VerticalAlignment));
+						widgetLayout.VerticalAlignment,
+						widgetLayout.TabOrder == 0 ? layout.TabOrder : widgetLayout.TabOrder));
 			}
 
 			return this;
@@ -827,6 +828,7 @@
 				SkipAbortConfirmation = !ShowScriptAbortPopup
 			};
 
+			var unorderedBlocks = new List<(UIBlockDefinition block, int tabOrder)>();
 			KeyValuePair<Widget, IWidgetLayout> defaultKeyValuePair = default(KeyValuePair<Widget, IWidgetLayout>);
 			int rowIndex = 0;
 			int columnIndex = 0;
@@ -860,13 +862,18 @@
 						widgetBlockDefinition.VerticalAlignment = AlignmentToUiString(widgetLayout.VerticalAlignment);
 						widgetBlockDefinition.Margin = widgetLayout.Margin.ToString();
 
-						uiBuilder.AppendBlock(widgetBlockDefinition);
+						unorderedBlocks.Add((widgetBlockDefinition, widgetLayout.TabOrder));
 					}
 
 					columnIndex++;
 				}
 
 				rowIndex++;
+			}
+
+			foreach (var (widgetBlockDefinition, _) in unorderedBlocks.OrderBy(x => x.tabOrder))
+			{
+				uiBuilder.AppendBlock(widgetBlockDefinition);
 			}
 
 			return uiBuilder;

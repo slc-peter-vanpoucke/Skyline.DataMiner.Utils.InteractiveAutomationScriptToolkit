@@ -16,5 +16,11 @@
 		/// </summary>
 		/// <remarks>The top-left position is (0, 0) by default.</remarks>
 		int Row { get; }
+
+		/// <summary>
+		///     Gets or sets the tab order of the widget.
+		///     The tab order determines the order in which widgets receive focus when the user navigates through them using the Tab key.
+		/// </summary>
+		int TabOrder { get; set; }
 	}
 }

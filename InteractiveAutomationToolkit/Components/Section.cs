@@ -137,6 +137,7 @@
 		/// <param name="column">Column location of the widget on the grid.</param>
 		/// <param name="horizontalAlignment">Horizontal alignment of the widget.</param>
 		/// <param name="verticalAlignment">Vertical alignment of the widget.</param>
+		/// <param name="tabOrder">Tab order of the widget.</param>
 		/// <returns>The updated section.</returns>
 		/// <exception cref="ArgumentNullException">When the widget is null.</exception>
 		/// <exception cref="ArgumentException">When the location is out of bounds of the grid.</exception>
@@ -146,9 +147,10 @@
 			int row,
 			int column,
 			HorizontalAlignment horizontalAlignment = HorizontalAlignment.Left,
-			VerticalAlignment verticalAlignment = VerticalAlignment.Center)
+			VerticalAlignment verticalAlignment = VerticalAlignment.Center,
+			int tabOrder = 0)
 		{
-			AddWidget(widget, new WidgetLayout(row, column, horizontalAlignment, verticalAlignment));
+			AddWidget(widget, new WidgetLayout(row, column, horizontalAlignment, verticalAlignment) { TabOrder = tabOrder });
 			return this;
 		}
 
@@ -200,7 +202,8 @@
 						widgetLayout.RowSpan,
 						widgetLayout.ColumnSpan,
 						widgetLayout.HorizontalAlignment,
-						widgetLayout.VerticalAlignment));
+						widgetLayout.VerticalAlignment,
+						widgetLayout.TabOrder == 0 ? layout.TabOrder : widgetLayout.TabOrder));
 			}
 
 			return this;

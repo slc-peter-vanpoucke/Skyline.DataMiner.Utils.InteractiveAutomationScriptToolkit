@@ -22,13 +22,15 @@
 		/// <param name="columnSpan">Number of horizontal cells the widget spans across.</param>
 		/// <param name="horizontalAlignment">Horizontal alignment of the widget.</param>
 		/// <param name="verticalAlignment">Vertical alignment of the widget.</param>
+		/// <param name="tabOrder">Tab order of the widget.</param>
 		public WidgetLayout(
 			int fromRow,
 			int fromColumn,
 			int rowSpan,
 			int columnSpan,
 			HorizontalAlignment horizontalAlignment = HorizontalAlignment.Left,
-			VerticalAlignment verticalAlignment = VerticalAlignment.Top)
+			VerticalAlignment verticalAlignment = VerticalAlignment.Top,
+			int tabOrder = 0)
 		{
 			Row = fromRow;
 			Column = fromColumn;
@@ -36,6 +38,7 @@
 			ColumnSpan = columnSpan;
 			HorizontalAlignment = horizontalAlignment;
 			VerticalAlignment = verticalAlignment;
+			TabOrder = tabOrder;
 			Margin = new Margin();
 		}
 
@@ -149,6 +152,9 @@
 				row = value;
 			}
 		}
+
+		/// <inheritdoc/>
+		public int TabOrder { get; set; }
 
 		/// <summary>
 		///     Gets or sets how many rows the widget spans on the grid.

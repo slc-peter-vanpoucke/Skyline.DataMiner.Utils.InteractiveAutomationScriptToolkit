@@ -64,5 +64,8 @@
 				row = value;
 			}
 		}
+
+		/// <inheritdoc/>
+		public int TabOrder { get; set; }
 	}
 }
